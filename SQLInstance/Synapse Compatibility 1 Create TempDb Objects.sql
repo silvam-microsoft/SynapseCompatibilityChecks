@@ -289,7 +289,7 @@ CREATE TABLE [dbo].[Servers](
 	[ServerDescription] [varchar](255) NULL,
 	[WindowsRelease] [varchar](100) NULL,
 	[CreatedDate] [datetime] NULL,
-	[Version] [varchar](255) NULL,
+	[Version] [varchar](1000) NULL,
 	[Edition] [varchar](255) NULL,
 	[ProductLevel] [varchar](50) NULL,
 	[Collation] [varchar](50) NULL,
