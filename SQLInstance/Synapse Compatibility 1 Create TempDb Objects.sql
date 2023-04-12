@@ -85,11 +85,11 @@ end
 
 
 GO
-create function [dbo].[fnNullVal] (@Type varchar(100) )
-returns varchar(100)
+create function [dbo].[fnNullVal] (@Type varchar(255) )
+returns varchar(255)
 as
 begin 
-	declare @NullVal varchar(100)
+	declare @NullVal varchar(255)
 
 	select @NullVal = case  when @Type LIKE '%char%' then ''''''
 							when @Type LIKE '%text%' then ''''''
@@ -285,9 +285,9 @@ CREATE TABLE [dbo].[Servers](
 	[ServerId] [int] IDENTITY(1,1) NOT NULL,
 	[EnvironmentId] [int] NULL,
 	[PurposeId] [int] NULL,
-	[ServerName] [varchar](100) NULL,
+	[ServerName] [varchar](255) NULL,
 	[ServerDescription] [varchar](255) NULL,
-	[WindowsRelease] [varchar](20) NULL,
+	[WindowsRelease] [varchar](100) NULL,
 	[CreatedDate] [datetime] NULL,
 	[Version] [varchar](255) NULL,
 	[Edition] [varchar](255) NULL,
@@ -298,8 +298,8 @@ CREATE TABLE [dbo].[Servers](
 	[PhysicalCPUCount] [int] NULL,
 	[PhysicalMemoryMB] [int] NULL,
 	[VMType] [varchar](50) NULL,
-	[Hardware] [varchar](100) NULL,
-	[ProcessorNameString] [varchar](100) NULL,
+	[Hardware] [varchar](255) NULL,
+	[ProcessorNameString] [varchar](255) NULL,
 	[BlockedProcessEvents] [varchar](255) NULL,
 	[DeadlockEvents] [varchar](255) NULL,
 	[ErrorEvents] [varchar](255) NULL,
@@ -310,12 +310,12 @@ CREATE TABLE [dbo].[Servers](
 	[Error] [varchar](255) NULL,
 	[BackupFolder] [varchar](500) NULL,
 	[DailyChecks] [bit] NULL,
-	[Domain] [varchar](100) NULL,
+	[Domain] [varchar](255) NULL,
 	[BackupChecks] [smallint] NULL,
-	[Build] [varchar](50) NULL,
+	[Build] [varchar](100) NULL,
 	[ErrorDate] [datetime] NULL,
 	[resource_governor_enabled_functions] [tinyint] NULL,
-	[RemoteUser] [varchar](100) NULL
+	[RemoteUser] [varchar](255) NULL
  CONSTRAINT [PK_Servers] PRIMARY KEY CLUSTERED 
 (
 	[ServerId] ASC
@@ -326,24 +326,24 @@ GO
 CREATE TABLE [dbo].[Jobs](
 	[JobId] [int] IDENTITY(1,1) NOT NULL,
 	[ServerId] [int] NULL,
-	[ServerName] [varchar](100) NULL,
+	[ServerName] [varchar](255) NULL,
 	[Jobname] [varchar](255) NULL,
 	[Description] [varchar](512) NULL,
 	[IsEnabled] [bit] NULL,
 	[ScheduleDscr] [nvarchar](255) NULL,
-	[Operator] [varchar](100) NULL,
+	[Operator] [varchar](255) NULL,
 	[OperatorEnabled] [bit] NULL,
-	[Operator_email_address] [nvarchar](100) NULL,
-	[Owner] [varchar](100) NULL,
+	[Operator_email_address] [nvarchar](255) NULL,
+	[Owner] [varchar](255) NULL,
 	[JobStartStepName] [varchar](255) NULL,
 	[IsScheduled] [bit] NULL,
 	[JobScheduleName] [varchar](255) NULL,
-	[Frequency] [varchar](36) NULL,
-	[Units] [varchar](21) NULL,
+	[Frequency] [varchar](100) NULL,
+	[Units] [varchar](100) NULL,
 	[Active_start_date] [datetime] NULL,
 	[Active_end_date] [datetime] NULL,
-	[Run_Time] [varchar](8) NULL,
-	[Created_Date] [varchar](24) NULL,
+	[Run_Time] [varchar](100) NULL,
+	[Created_Date] [varchar](100) NULL,
 	[jobidentifier] [uniqueidentifier] NULL,
  CONSTRAINT [PK_Jobs] PRIMARY KEY CLUSTERED 
 (
@@ -355,46 +355,46 @@ GO
 CREATE TABLE [dbo].[Databases](
 	[DatabaseId] [int] IDENTITY(1,1) NOT NULL,
 	[ServerId] [int] NULL,
-	[DatabaseName] [varchar](100) NULL,
-	[RecoveryModel] [varchar](100) NULL,
+	[DatabaseName] [varchar](255) NULL,
+	[RecoveryModel] [varchar](255) NULL,
 	[LogSizeKB] [bigint] NULL,
 	[LogUsedKB] [bigint] NULL,
-	[LogUsedPercentage] [varchar](50) NULL,
-	[DBCompatibilityLevel] [varchar](50) NULL,
-	[PageVerifyOption] [varchar](50) NULL,
+	[LogUsedPercentage] [varchar](100) NULL,
+	[DBCompatibilityLevel] [varchar](100) NULL,
+	[PageVerifyOption] [varchar](100) NULL,
 	[is_auto_create_stats_on] [bit] NULL,
 	[is_auto_update_stats_on] [bit] NULL,
 	[is_auto_update_stats_async_on] [bit] NULL,
 	[is_parameterization_forced] [bit] NULL,
-	[snapshot_isolation_state_desc] [varchar](50) NULL,
+	[snapshot_isolation_state_desc] [varchar](100) NULL,
 	[is_read_committed_snapshot_on] [bit] NULL,
 	[is_auto_close_on] [bit] NULL,
 	[is_auto_shrink_on] [bit] NULL,
 	[target_recovery_time_in_seconds] [int] NULL,
 	[DataMB] [bigint] NULL,
 	[LogMB] [bigint] NULL,
-	[State_Desc] [varchar](100) NULL,
+	[State_Desc] [varchar](255) NULL,
 	[Create_Date] [datetime] NULL,
 	[is_published] [bit] NULL,
 	[is_subscribed] [bit] NULL,
-	[Collation] [varchar](100) NULL,
+	[Collation] [varchar](255) NULL,
 	[CachedSizeMbs] [int] NULL,
 	[CPUTime] [bigint] NULL,
 	IOMbs bigint null,
 	[Is_Read_Only] [bit] NULL,
-	[delayed_durability_desc] [varchar](20) NULL,
-	[containment_desc] [varchar](20) NULL,
+	[delayed_durability_desc] [varchar](100) NULL,
+	[containment_desc] [varchar](100) NULL,
 	[is_cdc_enabled] [bit] NULL,
 	[is_broker_enabled] [bit] NULL,
 	[is_memory_optimized_elevate_to_snapshot_on] [bit] NULL,
-	[AvailabilityGroup] [varchar](100) NULL,
-	[PrimaryReplicaServerName] [varchar](100) NULL,
+	[AvailabilityGroup] [varchar](255) NULL,
+	[PrimaryReplicaServerName] [varchar](255) NULL,
 	[LocalReplicaRole] [tinyint] NULL,
 	[SynchronizationState] [tinyint] NULL,
 	[IsSuspended] [bit] NULL,
 	[IsJoined] [bit] NULL,
 	[SourceDatabaseName] [varchar](200) NULL,
-	[owner] [varchar](100) NULL,
+	[owner] [varchar](255) NULL,
 	[mirroring_state] [varchar](255) NULL,
 	[mirroring_role] [varchar](255) NULL,
 	[mirroring_safety_level] [varchar](255) NULL,
@@ -405,9 +405,9 @@ CREATE TABLE [dbo].[Databases](
 	[mirroring_connection_timeout] [int] NULL,
 	[mirroring_redo_queue] [int] NULL,
 	[is_encrypted] [bit] NULL,
-	[edition] [varchar](100) NULL,
-	[service_objective] [varchar](100) NULL,
-	[elastic_pool_name] [varchar](100) NULL,
+	[edition] [varchar](255) NULL,
+	[service_objective] [varchar](255) NULL,
+	[elastic_pool_name] [varchar](255) NULL,
  CONSTRAINT [PK_Databases] PRIMARY KEY CLUSTERED 
 (
 	[DatabaseId] ASC
@@ -420,7 +420,7 @@ CREATE TABLE [dbo].[DatabaseObjects](
 	[ServerId] [int] NULL,
 	[DatabaseId] [int] NULL,
 	[ObjectName] [varchar](200) NULL,
-	[SchemaName] [varchar](100) NULL,
+	[SchemaName] [varchar](255) NULL,
 	[Xtype] [varchar](2) NULL,
 	[RowCount] [bigint] NULL,
 	[ColCount] [int] NULL,
@@ -428,7 +428,7 @@ CREATE TABLE [dbo].[DatabaseObjects](
 	[RowLength] [int] NULL,
 	[ReplColumns] [int] NULL,
 	[HasCr_Dt] [bit] NULL,
-	[SQL_DATA_ACCESS] [varchar](20) NULL,
+	[SQL_DATA_ACCESS] [varchar](100) NULL,
 	[ROUTINE_DEFINITION] [varchar](max) NULL,
 	[is_mspublished] [bit] NULL,
 	[is_rplpublished] [bit] NULL,
@@ -437,9 +437,9 @@ CREATE TABLE [dbo].[DatabaseObjects](
 	[parent_object_id] [int] NULL,
 	[start_value] [bigint] NULL,
 	[current_value] [bigint] NULL,
-	[ParentSchema] [varchar](100) NULL,
-	[ParentTable] [varchar](100) NULL,
-	[ParentColumn] [varchar](100) NULL,
+	[ParentSchema] [varchar](255) NULL,
+	[ParentTable] [varchar](255) NULL,
+	[ParentColumn] [varchar](255) NULL,
 	[crdate] [datetime] NULL,
  CONSTRAINT [PK_DatabaseObjects] PRIMARY KEY CLUSTERED 
 (
@@ -451,16 +451,16 @@ GO
 CREATE TABLE [dbo].[IndexUsage](
 	[ServerId] [int] NULL,
 	[DatabaseId] [int] NULL,
-	[data_space] [varchar](200) NULL,
-	[allocation_desc] [varchar](200) NULL,
-	[table_schema] [varchar](200) NULL,
-	[object_type] [varchar](200) NULL,
-	[table_name] [varchar](200) NULL,
-	[index_type] [varchar](200) NULL,
-	[index_name] [varchar](200) NULL,
+	[data_space] [varchar](255) NULL,
+	[allocation_desc] [varchar](255) NULL,
+	[table_schema] [varchar](255) NULL,
+	[object_type] [varchar](255) NULL,
+	[table_name] [varchar](255) NULL,
+	[index_type] [varchar](255) NULL,
+	[index_name] [varchar](255) NULL,
 	[is_unique] [bit] NULL,
 	[is_disabled] [bit] NULL,
-	[database_file] [varchar](200) NULL,
+	[database_file] [varchar](255) NULL,
 	[size_mbs] [int] NULL,
 	[used_size] [int] NULL,
 	[data_size] [int] NULL,
@@ -468,15 +468,15 @@ CREATE TABLE [dbo].[IndexUsage](
 	[reads] [bigint] NULL,
 	[index_id] [int] NULL,
 	[fill_factor] [float] NULL,
-	[cols] [varchar](1000) NULL,
+	[cols] [varchar](8000) NULL,
 	[included] [varchar](8000) NULL,
-	[filter_definition] [varchar](1000) NULL,
+	[filter_definition] [varchar](2000) NULL,
 	[drop_cmd] [varchar](8000) NULL,
 	[disable_cmd] [varchar](8000) NULL,
 	[create_cmd] [varchar](8000) NULL,
 	[DatabaseObjectId] [int] NULL,
 	[rowid] [int] IDENTITY(1,1) NOT NULL,
-	[data_compression_desc] [varchar](100) NULL,
+	[data_compression_desc] [varchar](255) NULL,
  CONSTRAINT [pk_IndexUsage] PRIMARY KEY CLUSTERED 
 (
 	[rowid] ASC
@@ -492,12 +492,12 @@ CREATE TABLE [dbo].[DatabaseFiles](
 	[DatabaseFileId] [int] IDENTITY(1,1) NOT NULL,
 	[ServerId] [int] NULL,
 	[DatabaseId] [int] NULL,
-	[FileName] [varchar](200) NULL,
+	[FileName] [varchar](255) NULL,
 	[PhysicalName] [varchar](500) NULL,
 	[TotalMbs] [int] NULL,
 	[AvailableMbs] [int] NULL,
 	[fileid] [int] NULL,
-	[filegroupname] [varchar](100) NULL,
+	[filegroupname] [varchar](255) NULL,
  CONSTRAINT [PK_DatabaseFiles] PRIMARY KEY CLUSTERED 
 (
 	[DatabaseFileId] ASC
@@ -511,16 +511,16 @@ CREATE TABLE [dbo].[DatabaseObjectColumns](
 	[DatabaseObjectId] [int] NULL,
 	[ServerId] [int] NULL,
 	[DatabaseId] [int] NULL,
-	[TABLE_CATALOG] [varchar](200) NULL,
-	[TABLE_SCHEMA] [varchar](200) NULL,
-	[TABLE_NAME] [varchar](200) NULL,
-	[COLUMN_NAME] [varchar](200) NULL,
+	[TABLE_CATALOG] [varchar](255) NULL,
+	[TABLE_SCHEMA] [varchar](255) NULL,
+	[TABLE_NAME] [varchar](255) NULL,
+	[COLUMN_NAME] [varchar](255) NULL,
 	[ORDINAL_POSITION] [int] NULL,
-	[COLUMN_DEFAULT] [varchar](800) NULL,
-	[IS_NULLABLE] [varchar](100) NULL,
-	[DATA_TYPE] [varchar](100) NULL,
+	[COLUMN_DEFAULT] [varchar](2000) NULL,
+	[IS_NULLABLE] [varchar](255) NULL,
+	[DATA_TYPE] [varchar](255) NULL,
 	[CHARACTER_MAXIMUM_LENGTH] [int] NULL,
-	[COLLATION_NAME] [varchar](100) NULL,
+	[COLLATION_NAME] [varchar](255) NULL,
 	[is_computed] [bit] NULL,
 	[is_identity] [bit] NULL,
  CONSTRAINT [PK_DatabaseObjectColumns] PRIMARY KEY CLUSTERED 
@@ -536,13 +536,13 @@ GO
 CREATE TABLE [dbo].[AvailabilityGroups](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ServerId] [int] NULL,
-	[AvailabiityGroup] [varchar](100) NULL,
-	[replica_server_name] [varchar](100) NULL,
+	[AvailabiityGroup] [varchar](255) NULL,
+	[replica_server_name] [varchar](255) NULL,
 	[IsPrimaryServer] [bit] NULL,
 	[ReadableSecondary] [bit] NULL,
 	[Synchronous] [bit] NULL,
-	[failover_mode_desc] [varchar](100) NULL,
-	[synchronization_health_desc] [varchar](100) NULL,
+	[failover_mode_desc] [varchar](255) NULL,
+	[synchronization_health_desc] [varchar](255) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -589,7 +589,7 @@ GO
 CREATE TABLE [dbo].[TopWait](
 	[TopWaitId] [int] IDENTITY(1,1) NOT NULL,
 	[ServerId] [int] NULL,
-	[wait_type] [nvarchar](60) NOT NULL,
+	[wait_type] [nvarchar](255) NOT NULL,
 	[wait_time_ms] [bigint] NOT NULL,
 	[signal_wait_time_ms] [bigint] NOT NULL,
 	[resource_wait_time_ms] [bigint] NULL,
@@ -610,7 +610,7 @@ GO
 CREATE TABLE [dbo].[Volumes](
 	[VolumeId] [int] IDENTITY(1,1) NOT NULL,
 	[ServerId] [int] NULL,
-	[volume_mount_point] [varchar](100) NULL,
+	[volume_mount_point] [varchar](255) NULL,
 	[TotalGB] [int] NULL,
 	[AvailableGB] [int] NULL,
 	[PercentageFree] [numeric](9, 2) NULL,
@@ -669,10 +669,10 @@ GO
 CREATE TABLE [dbo].[Sequences](
 	[ServerId] [int] NULL,
 	[DatabaseId] [int] NULL,
-	[SequenceName] [varchar](100) NULL,
+	[SequenceName] [varchar](255) NULL,
 	[Current_value] [bigint] NULL,
-	[ParentTable] [varchar](100) NULL,
-	[ParentColumn] [varchar](100) NULL,
+	[ParentTable] [varchar](255) NULL,
+	[ParentColumn] [varchar](255) NULL,
 	[maxExisting] [bigint] NULL,
 	[NextInUse] [bigint] NULL,
 	[IsMax] [bit] NULL,
@@ -707,10 +707,10 @@ begin
 	declare @sql varchar(max)
 		, @message varchar(max)
 		, @CommandId int
-		, @ServerName varchar(100)
+		, @ServerName varchar(255)
 		, @Command varchar(max)
 
-	declare @t table (CommandId int, ServerName varchar(100), command varchar(max) )
+	declare @t table (CommandId int, ServerName varchar(255), command varchar(max) )
 
 	update Command set StartDate = getdate()
 	output deleted.CommandId, deleted.ServerName, deleted.Command into @t 
@@ -747,7 +747,7 @@ GO
 CREATE   proc [dbo].[spLoadAvailabilityGroups] @serverid int=0
 as
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100)
+declare @sql nvarchar(max), @SERVER VARCHAR(255)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid FROM SERVERS s
 	where (Version like '%2012%' or Version like '%2014%' or Version like '%2016%' or Version like '%2017%' or Version like '%2019%')
@@ -796,7 +796,7 @@ begin
 if @serverid = 0
 	delete from [ClusterNodes]
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @version varchar(20)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @version varchar(20)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid, MajorVersion FROM vwSERVERS s
 
@@ -839,7 +839,7 @@ declare @linkedserver varchar(255)
 if @serverid = '0' 
 	truncate table DatabaseFiles
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @DatabaseName varchar(100), @DatabaseId varchar(10), @version varchar(255)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @DatabaseName varchar(255), @DatabaseId varchar(10), @version varchar(255)
 
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid, version FROM SERVERS s
@@ -911,7 +911,7 @@ if object_id('tempdb..#dbs') is not null
 
 select distinct DatabaseId into #dbs from DatabaseObjectColumns doc 
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @DatabaseName varchar(100), @DatabaseId varchar(10), @version varchar(255), @linkedserver varchar(255)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @DatabaseName varchar(255), @DatabaseId varchar(10), @version varchar(255), @linkedserver varchar(255)
 
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT  SERVERNAME, serverid, version from servers s
@@ -1004,8 +1004,8 @@ delete from [dbo].[DatabaseObjectColumns]
 delete from [dbo].[DatabaseObjects]
 */
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @DatabaseName varchar(100), @DatabaseId varchar(10), @Version	varchar	(255), @linkedserver varchar(255)
-	, @edition varchar(100)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @DatabaseName varchar(255), @DatabaseId varchar(10), @Version	varchar	(255), @linkedserver varchar(255)
+	, @edition varchar(255)
 
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT  SERVERNAME, serverid, Version from Servers s
@@ -1310,7 +1310,7 @@ else
 	delete from databases where serverid=@serverid
 
 declare @sql nvarchar(max)
-	, @SERVER VARCHAR(100)--, @serverid int
+	, @SERVER VARCHAR(255)--, @serverid int
 	, @Version	varchar	(255)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid, isnull(Version,'Microsoft SQL Server 2000')
@@ -1755,7 +1755,7 @@ as
 if @serverid = '0'
 	truncate table [IndexUsage]
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @DatabaseName varchar(100), @DatabaseId varchar(10), @version varchar(255), @linkedserver varchar(255)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @DatabaseName varchar(255), @DatabaseId varchar(10), @version varchar(255), @linkedserver varchar(255)
 
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid, version FROM SERVERS s
@@ -1897,7 +1897,7 @@ begin
 	delete from Jobs where serverid=@serverid
 end
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100)
+declare @sql nvarchar(max), @SERVER VARCHAR(255)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid FROM SERVERS s
 
@@ -2004,7 +2004,7 @@ else
 /**********************************************
 	JOB StepS
 ***********************************************/
-declare @sql nvarchar(max), @SERVER VARCHAR(100)
+declare @sql nvarchar(max), @SERVER VARCHAR(255)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid FROM SERVERS s
 
@@ -2066,8 +2066,8 @@ as
 set nocount on
 truncate table Sequences
 
-declare @Server varchar(100), @DatabaseName varchar(100), @SchemaName varchar(100), @ObjectName varchar(100),
-		 @ParentSchema varchar(100), @ParentTable varchar(100), @ParentColumn varchar(100), @current_value bigint,
+declare @Server varchar(255), @DatabaseName varchar(255), @SchemaName varchar(255), @ObjectName varchar(255),
+		 @ParentSchema varchar(255), @ParentTable varchar(255), @ParentColumn varchar(255), @current_value bigint,
 		  @databaseid int, @version varchar(255), @linkedserver varchar(255)
 
 declare @sql nvarchar(max)
@@ -2141,7 +2141,7 @@ if OBJECT_ID('tempdb..#t') is not null
 	drop table #t
 
 CREATE table #t  (
-	ServerName varchar(100),
+	ServerName varchar(255),
 	WindowsRelease varchar(20),
 	CreatedDate datetime,
 	Version varchar(255),
@@ -2157,7 +2157,7 @@ CREATE table #t  (
 	resource_governor_enabled_functions tinyint
 	)
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @error varchar(255), @version varchar(200)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @error varchar(255), @version varchar(200)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, isnull(Version,'Microsoft SQL Server 2000')
 	FROM vwSERVERS 
@@ -2277,7 +2277,7 @@ GO
 CREATE proc [dbo].[spLoadServices] @serverid int=0
 as
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100)
+declare @sql nvarchar(max), @SERVER VARCHAR(255)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid FROM SERVERS s
 
@@ -2318,7 +2318,7 @@ if @serverid = '0'
 else 
 	delete from TopSql where serverid = @serverid
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @DatabaseName varchar(100), @DatabaseId varchar(10), @version varchar(255), @linkedserver varchar(255)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @DatabaseName varchar(255), @DatabaseId varchar(10), @version varchar(255), @linkedserver varchar(255)
 
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid, version FROM SERVERS s
@@ -2391,7 +2391,7 @@ as
 if @serverid = '0'
 	truncate table TopWait
 
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @DatabaseName varchar(100), @DatabaseId varchar(10)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @DatabaseName varchar(255), @DatabaseId varchar(10)
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid FROM SERVERS s
 
@@ -2490,7 +2490,7 @@ else
 /**************
 	Volumes
 **************/
-declare @sql nvarchar(max), @SERVER VARCHAR(100), @Version	varchar	(255)
+declare @sql nvarchar(max), @SERVER VARCHAR(255), @Version	varchar	(255)
 
 DECLARE T_CURSOR CURSOR FAST_FORWARD FOR
 	SELECT SERVERNAME, serverid, Version FROM SERVERS s
@@ -2578,7 +2578,7 @@ declare @sql nvarchar(max)
 GO
 
 create table dbo.LinkedServers (
-	[ServerName] varchar(100), LinkedServer varchar(255), providername varchar(100), datasource varchar(255)
+	[ServerName] varchar(255), LinkedServer varchar(255), providername varchar(255), datasource varchar(255)
 )
 go
 
