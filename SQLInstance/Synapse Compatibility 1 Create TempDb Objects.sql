@@ -3145,6 +3145,7 @@ exec [spLoadDataBaseObjectColums]
 exec [spLoadIndexUsage] 
 
 exec [spLoadIncompatibilities]
+exec [spLoadLinkedServers]
 
 go
 
@@ -3463,6 +3464,7 @@ select d.DatabaseName
 from sequences s
 join databases d on s.databaseid= d.databaseid
 
+select * from LinkedServers
 
 go
 
